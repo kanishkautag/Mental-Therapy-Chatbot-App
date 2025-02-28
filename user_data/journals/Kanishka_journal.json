@@ -1,0 +1,36 @@
+[
+  {
+    "timestamp": "2025-02-25 19:18:57",
+    "date": "2025-02-25",
+    "entry": "I am happy today",
+    "mood": "Neutral",
+    "tags": []
+  },
+  {
+    "timestamp": "2025-02-25 19:04:54",
+    "date": "2025-02-25",
+    "entry": "I am stressed about tomorrow's work",
+    "mood": "Low",
+    "tags": [
+      "work"
+    ]
+  },
+  {
+    "timestamp": "2025-02-25 19:21:52",
+    "date": "2025-02-25",
+    "entry": "Hello. I am stressed today",
+    "mood": "Very Low",
+    "tags": [
+      "Work"
+    ]
+  },
+  {
+    "timestamp": "2025-02-25 19:25:19",
+    "date": "2025-02-25",
+    "entry": "Hello. I am good today",
+    "mood": "Excellent",
+    "tags": [
+      "work"
+    ]
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "role": "assistant",
+    "content": "Hello! I'm here to listen. How are you feeling today?"
+  },
+  {
+    "role": "user",
+    "content": "hey"
+  },
+  {
+    "role": "assistant",
+    "content": "hey maybe also consider writing down your main concerns to help clarify what's on your mind and see if that helps you gain a clearer perspective."
+  }
+]

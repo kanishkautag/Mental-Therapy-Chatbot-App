@@ -1,0 +1,22 @@
+[
+  {
+    "role": "assistant",
+    "content": "Hello! How can I help you today?"
+  },
+  {
+    "role": "user",
+    "content": "Hey"
+  },
+  {
+    "role": "assistant",
+    "content": "You seem to be feeling a bit overwhelmed with your daily tasks and responsibilities. Perhaps you could break down larger tasks into smaller, more manageable chunks or create a schedule to help stay organized? You might also consider delegating some of these tasks if possible to free up time for other areas of your life."
+  },
+  {
+    "role": "user",
+    "content": "My Attendance is low"
+  },
+  {
+    "role": "assistant",
+    "content": "Perhaps you could consider setting reminders on your calendar to attend classes or events that interest you? You might also want to check in with yourself regularly about what's causing your attendance to be lower than usual."
+  }
+]

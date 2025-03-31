@@ -2,68 +2,61 @@ import os
 import streamlit as st
 
 # Modern theme definitions inspired by Gnome and Hyprland
+# --- Keep all your existing imports and functions above this ---
+# (os, streamlit, create_directories, get_user_data_path, apply_theme, color functions, etc.)
+
+# ==============================================================================
+# Refined Theme Definitions (Focus on Color Palettes)
+# ==============================================================================
 THEMES = {
-    "Solarized Dark": {
-        "primary_color": "#268bd2",  # Solarized blue
-        "background_color": "#002b36",
-        "text_color": "#93a1a1",
-        "font": "'Fira Sans', sans-serif"
+    # --- Dark Themes ---
+    "Catppuccin Mocha": { # Popular, soft dark theme
+        "primary_color": "#cba6f7",      # Lavender (Accent)
+        "background_color": "#1e1e2e",  # Base (Background)
+        "text_color": "#cad3f5",        # Text (Slightly adjusted for potentially better contrast)
+        "font": "'JetBrains Mono', monospace" # Good coding font
     },
-    "Gruvbox Dark": {
-        "primary_color": "#d65d0e",  # Orange
-        "background_color": "#282828",
-        "text_color": "#ebdbb2",
-        "font": "'Roboto Mono', monospace"
+    "Nord": { # Cool, subdued dark theme
+        "primary_color": "#88c0d0",      # Frost 3 - Blue/Cyan (Accent)
+        "background_color": "#2e3440",  # Polar Night 1 (Darkest Background)
+        "text_color": "#e5e9f0",        # Snow Storm 2 (Readable light text)
+        "font": "'Inter', sans-serif"   # Clean sans-serif
     },
-    "Nord": {
-        "primary_color": "#81a1c1",  # Nord blue
-        "background_color": "#2e3440",
-        "text_color": "#d8dee9",
-        "font": "'Inter', sans-serif"
+    "Gruvbox Dark": { # Retro, warm dark theme
+        "primary_color": "#fe8019",      # Orange (Accent)
+        "background_color": "#282828",  # Hard Dark Background
+        "text_color": "#ebdbb2",        # Light Text
+        "font": "'Fira Code', monospace" # Often paired with Gruvbox
     },
-    "Dracula": {
-        "primary_color": "#bd93f9",  # Dracula purple
-        "background_color": "#282a36",
-        "text_color": "#f8f8f2",
+    "Solarized Dark": { # Classic high-contrast dark theme
+        "primary_color": "#268bd2",      # Blue (Accent)
+        "background_color": "#002b36",  # Base03 (Dark Background)
+        "text_color": "#93a1a1",        # Base1 (Subdued but readable text)
+        "font": "'Source Code Pro', monospace"
+    },
+    "Dracula": { # Popular vibrant dark theme
+        "primary_color": "#bd93f9",      # Purple (Accent)
+        "background_color": "#282a36",  # Background
+        "text_color": "#f8f8f2",        # Foreground (Bright text)
         "font": "'JetBrains Mono', monospace"
     },
-    "Catppuccin Mocha": {
-        "primary_color": "#cba6f7",  # Lavender
-        "background_color": "#1e1e2e",
-        "text_color": "#cdd6f4",
-        "font": "'JetBrains Mono', monospace"
+     "Tokyo Night": { # Balanced dark theme
+        "primary_color": "#7aa2f7",      # Blue (Accent)
+        "background_color": "#1a1b26",  # Background
+        "text_color": "#c0caf5",        # Foreground (Readable light text)
+        "font": "'Roboto Mono', monospace" # Common choice
     },
-    "Material Dark": {
-        "primary_color": "#6200ee",  # Material deep purple
-        "background_color": "#121212",
-        "text_color": "#ffffff",
-        "font": "'Montserrat', sans-serif"
+    "Arc Dark": { # Clean dark theme
+        "primary_color": "#5294e2",      # Arc Blue (Accent)
+        "background_color": "#2f343f",  # Background
+        "text_color": "#d3dae3",        # Light Text
+        "font": "'Nunito Sans', sans-serif" # Clean sans-serif
     },
-    "Adwaita Light": {
-        "primary_color": "#3584e4",  # Gnome blue
-        "background_color": "#ffffff",
-        "text_color": "#1f1f1f",
-        "font": "'Ubuntu', 'Cantarell', sans-serif"
-    },
-    "Light Breeze": {
-        "primary_color": "#0062cc",  # Breeze blue
-        "background_color": "#eaeff7",
-        "text_color": "#000000",
-        "font": "'Poppins', sans-serif"
-    },
-    "Arc Dark": {
-        "primary_color": "#5294e2",  # Arc blue
-        "background_color": "#2f343f",
-        "text_color": "#d3dae3",
-        "font": "'Nunito', sans-serif"
-    },
-    "Tokyo Night": {
-        "primary_color": "#7aa2f7",  # Tokyo blue
-        "background_color": "#1a1b26",
-        "text_color": "#c0caf5",
-        "font": "'Roboto', sans-serif"
-    }
+
 }
+
+# --- Keep all your existing functions below this ---
+# (create_directories, get_user_data_path, apply_theme, color functions, format_timestamp, etc.)
 
 def create_directories():
     """Create necessary directories for data storage"""

@@ -145,18 +145,23 @@ def resources_page():
     with crisis_col1:
         st.markdown("""
         ### Immediate Help
-        
-        - **National Suicide Prevention Lifeline**
-          - Call: 988 or 1-800-273-8255
-          - Available 24/7
-        
-        - **Crisis Text Line**
-          - Text HOME to 741741
-          - Available 24/7
-        
-        - **Emergency Services**
-          - Call: 911 (US)
-          - For immediate danger
+
+- **National Suicide Prevention Helpline India**
+  - Call: 9152987821
+  - Available 24/7
+
+- **Snehi India (Mental Health Support)**
+  - Call: +91 22 2772 6771 / +91 22 2772 6772
+  - Available 10 AM - 8 PM
+
+- **Vandrevala Foundation (Mental Health Support)**
+  - Call: 9999666555 / 18602662345
+  - Available 24/7
+
+- **Emergency Services**
+  - Call: 112 (India)
+  - For immediate danger
+
         """)
     
     with crisis_col2:

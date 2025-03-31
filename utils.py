@@ -3,17 +3,29 @@ import streamlit as st
 
 # Modern theme definitions inspired by Gnome and Hyprland
 THEMES = {
-    "Adwaita Light": {
-        "primary_color": "#3584e4",  # Gnome blue
-        "background_color": "#ffffff",
-        "text_color": "#1f1f1f",
-        "font": "'Ubuntu', 'Cantarell', sans-serif"
+    "Solarized Dark": {
+        "primary_color": "#268bd2",  # Solarized blue
+        "background_color": "#002b36",
+        "text_color": "#93a1a1",
+        "font": "'Fira Sans', sans-serif"
     },
-    "Adwaita Dark": {
-        "primary_color": "#3584e4",  # Gnome blue
-        "background_color": "#1e1e1e",
-        "text_color": "#f6f5f4",
-        "font": "'Ubuntu', 'Cantarell', sans-serif"
+    "Gruvbox Dark": {
+        "primary_color": "#d65d0e",  # Orange
+        "background_color": "#282828",
+        "text_color": "#ebdbb2",
+        "font": "'Roboto Mono', monospace"
+    },
+    "Nord": {
+        "primary_color": "#81a1c1",  # Nord blue
+        "background_color": "#2e3440",
+        "text_color": "#d8dee9",
+        "font": "'Inter', sans-serif"
+    },
+    "Dracula": {
+        "primary_color": "#bd93f9",  # Dracula purple
+        "background_color": "#282a36",
+        "text_color": "#f8f8f2",
+        "font": "'JetBrains Mono', monospace"
     },
     "Catppuccin Mocha": {
         "primary_color": "#cba6f7",  # Lavender
@@ -21,32 +33,32 @@ THEMES = {
         "text_color": "#cdd6f4",
         "font": "'JetBrains Mono', monospace"
     },
-    "Catppuccin Latte": {
-        "primary_color": "#8839ef",  # Lavender
-        "background_color": "#eff1f5",
-        "text_color": "#4c4f69",
-        "font": "'JetBrains Mono', monospace"
+    "Material Dark": {
+        "primary_color": "#6200ee",  # Material deep purple
+        "background_color": "#121212",
+        "text_color": "#ffffff",
+        "font": "'Montserrat', sans-serif"
     },
-    "Nord": {
-        "primary_color": "#88c0d0",  # Nord blue
-        "background_color": "#2e3440",
-        "text_color": "#eceff4",
-        "font": "'Fira Sans', sans-serif"
+    "Adwaita Light": {
+        "primary_color": "#3584e4",  # Gnome blue
+        "background_color": "#ffffff",
+        "text_color": "#1f1f1f",
+        "font": "'Ubuntu', 'Cantarell', sans-serif"
     },
-    "Dracula": {
-        "primary_color": "#bd93f9",  # Purple
-        "background_color": "#282a36",
-        "text_color": "#f8f8f2",
-        "font": "'Source Code Pro', monospace"
+    "Light Breeze": {
+        "primary_color": "#0062cc",  # Breeze blue
+        "background_color": "#eaeff7",
+        "text_color": "#000000",
+        "font": "'Poppins', sans-serif"
     },
-    "Solarized Light": {
-        "primary_color": "#268bd2",  # Blue
-        "background_color": "#fdf6e3",
-        "text_color": "#657b83",
-        "font": "'Inter', sans-serif"
+    "Arc Dark": {
+        "primary_color": "#5294e2",  # Arc blue
+        "background_color": "#2f343f",
+        "text_color": "#d3dae3",
+        "font": "'Nunito', sans-serif"
     },
     "Tokyo Night": {
-        "primary_color": "#7aa2f7",  # Blue
+        "primary_color": "#7aa2f7",  # Tokyo blue
         "background_color": "#1a1b26",
         "text_color": "#c0caf5",
         "font": "'Roboto', sans-serif"

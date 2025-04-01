@@ -1,74 +1,102 @@
 import streamlit as st
 from langchain_openai import ChatOpenAI
-from streamlit_chat import message
+# Removed streamlit_chat import as we use native elements now
 import os
 import json
 from datetime import datetime
-from utils import get_user_data_path
+# Assuming utils.py exists with get_user_data_path
+from utils import get_user_data_path # Make sure this function exists and works
 import traceback # Import for detailed error logging
+import re # Keep for validation robustness
 
-# Configure the LLM
+# --- LLM Configuration and Instances (No Changes) ---
 def get_llm():
-    # Keep settings, maybe reduce max_tokens if issue persists after prompt changes
     return ChatOpenAI(
         model="llama3.2:1b",
         base_url="http://localhost:11434/v1",
-        temperature=0.2, # Slightly lower temperature to encourage focus
-        max_tokens=150,  # Reduced max_tokens further as a precaution
+        temperature=0.2,
+        max_tokens=150,
         openai_api_key="NA",
         frequency_penalty=0.5,
         presence_penalty=0.4
     )
-
-# Create separate LLM instances
 empathy_llm = get_llm()
 practical_llm = get_llm()
 supervisor_llm = get_llm()
 
-# --- Revised Prompts ---
+# --- List of common greetings (for the internal check) ---
+# Moved here for use in get_practical_response
+COMMON_GREETINGS_CHECK = [
+    "hi", "hello", "hey", "yo", "sup", "what's up", "whats up",
+    "good morning", "good afternoon", "good evening", "greetings",
+    "hiya", "howdy"
+]
 
+# --- get_empathy_response (No Changes from previous minimal version) ---
 def get_empathy_response(user_input):
     prompt = f"""Your PRIMARY TASK: Respond briefly and appropriately to the user.
 
     RULES (Follow STRICTLY):
-    1. PLAIN TEXT ONLY. No markdown, JSON, lists.
-    2. **DEFAULT RESPONSE:** If the input is a greeting ("hi", "hello", "whats up"), neutral, or unclear, reply with ONE simple, open question inviting more detail. Example: "Hi there, what's on your mind?" or "Hello, how can I help today?"
-    3. **EXCEPTION:** If the user *clearly* expresses significant distress or negative emotion (e.g., "I feel awful", "I'm so stressed"), THEN validate this feeling briefly (1 sentence). Example: "It sounds like things are really difficult right now."
-    4. **CRITICAL: DO NOT ASSUME distress from simple greetings.** Stick to the default response unless distress is obvious and explicitly stated by the user.
-    5. MAX 1-2 short sentences.
-    6. NO advice, NO solutions, NO interpretations, NO AI feelings.
-    7. Professional, calm tone.
+    1. **GREETING CHECK:** If the user input is ONLY a simple greeting (like "hi", "hello", "hey", "whats up", "sup", "good morning"), your ONLY valid response is a simple greeting question like "Hello, how can I help today?" or "Hi there, what's on your mind?". DO NOT add validation or anything else for simple greetings.
+    2. **DEFAULT RESPONSE (Non-Greeting, Non-Distress):** If the input is neutral, unclear, or a non-distress statement (and NOT a simple greeting), reply with ONE simple, open question inviting more detail. Example: "Okay, tell me more about that."
+    3. **EXCEPTION (Distress):** If the user *clearly* expresses significant distress or negative emotion (e.g., "I feel awful", "I'm so stressed"), THEN validate this feeling briefly (1 sentence). Example: "It sounds like things are really difficult right now."
+    4. **CRITICAL:** DO NOT ASSUME distress. Prioritize the GREETING CHECK first.
+    5. PLAIN TEXT ONLY. No markdown, JSON, lists. MAX 1-2 short sentences.
+    6. NO advice, NO solutions, NO interpretations, NO AI feelings. Professional, calm tone.
 
     USER INPUT: {user_input}
 
-    YOUR RESPONSE (Plain text, Max 2 sentences):"""
-    response = empathy_llm.invoke(prompt)
-    return response.content.strip()
+    YOUR RESPONSE (Plain text, Max 2 sentences, strictly follow rules above):"""
+    try:
+        response = empathy_llm.invoke(prompt)
+        # Keep the basic override check just in case
+        normalized_input = user_input.lower().strip().rstrip('!.')
+        if normalized_input in COMMON_GREETINGS_CHECK and len(response.content.strip().split()) > 7:
+            print(f"[DEBUG] Empathy LLM likely failed greeting check for '{user_input}'. Overriding.")
+            return "Hello! How can I help you today?"
+        return response.content.strip()
+    except Exception as e:
+        print(f"ERROR in get_empathy_response: {e}")
+        return "I'm here to listen. What's happening?" # Fallback
 
+# --- get_practical_response (MINIMAL CHANGE: Added internal greeting check) ---
 def get_practical_response(user_input):
+    # ***** START MINIMAL CHANGE *****
+    # Check for greeting *before* even calling the LLM for this specific function
+    normalized_input = user_input.lower().strip().rstrip('.!')
+    if normalized_input in COMMON_GREETINGS_CHECK:
+        print(f"[DEBUG] Practical Check: Input '{user_input}' is a greeting. Forcing NO_ACTION_NEEDED.")
+        return "NO_ACTION_NEEDED"
+    # ***** END MINIMAL CHANGE *****
+
+    # If it's not a greeting, proceed with the LLM call as before
     prompt = f"""Your ONLY TASK: Provide ONE actionable suggestion IF the user clearly asks for help or describes a solvable problem. Otherwise, output 'NO_ACTION_NEEDED'.
 
     RULES (Follow STRICTLY):
-    1. PLAIN TEXT ONLY. No markdown, JSON, lists.
-    2. **Analyze input:** Does it contain a clear problem needing a practical step OR a direct request for advice? Check carefully.
-    3. **If YES:** Output ONE brief, concrete suggestion (1 sentence). Start with "You might consider...". Example: "You might consider writing down your main concerns."
-    4. **If NO (e.g., input is "hi", "whats up", "hello", just venting, vague): Output the literal text `NO_ACTION_NEEDED` and NOTHING ELSE.** Do not add any other words or explanation. This is the required output for non-problem inputs.
-    5. NO emotional validation, NO questions. MAX 1 sentence if giving advice.
+    1. **Analyze input:** Does it contain a clear problem needing a practical step OR a direct request for advice/help? Check carefully. (You should NOT receive simple greetings here based on external checks, but if you do, output NO_ACTION_NEEDED).
+    2. **If YES:** Output ONE brief, concrete suggestion (1 sentence). Start with "You might consider...". Example: "You might consider writing down your main concerns."
+    3. **If NO (e.g., venting without request, vague statement): Output the literal text `NO_ACTION_NEEDED` and NOTHING ELSE.**
+    4. PLAIN TEXT ONLY. No markdown, JSON, lists. MAX 1 sentence if giving advice. NO validation/questions.
 
     USER INPUT: {user_input}
 
     YOUR RESPONSE (Plain text: 1 suggestion OR 'NO_ACTION_NEEDED'):"""
-    response = practical_llm.invoke(prompt)
-    # Explicitly check if the output is exactly the marker, otherwise return marker
-    # This helps if the LLM adds extra spaces or minor deviations
-    if "NO_ACTION_NEEDED" in response.content.strip():
-         return "NO_ACTION_NEEDED"
-    # If it contains actual advice (and isn't the marker), return it
-    elif len(response.content.strip()) > 0 and response.content.strip() != "NO_ACTION_NEEDED":
-         return response.content.strip()
-    # Default back to marker if output is empty or unexpected
-    else:
-         return "NO_ACTION_NEEDED"
+    try:
+        response = practical_llm.invoke(prompt)
+        content = response.content.strip()
+
+        # Standard checks remain
+        if "NO_ACTION_NEEDED" in content:
+             return "NO_ACTION_NEEDED"
+        elif len(content) > 5 and content != "NO_ACTION_NEEDED":
+             return content
+        else:
+             print(f"[DEBUG] Practical LLM returned unexpected/empty: '{content}' for non-greeting input. Defaulting to NO_ACTION_NEEDED.")
+             return "NO_ACTION_NEEDED"
+    except Exception as e:
+        print(f"ERROR in get_practical_response: {e}")
+        return "NO_ACTION_NEEDED" # Fallback
+
 
 
 def combine_responses(user_input, empathy_response, practical_response):

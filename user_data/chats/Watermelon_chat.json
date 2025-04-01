@@ -18,5 +18,17 @@
   {
     "role": "assistant",
     "content": "Perhaps you could consider setting reminders on your calendar to attend classes or events that interest you? You might also want to check in with yourself regularly about what's causing your attendance to be lower than usual."
+  },
+  {
+    "role": "user",
+    "content": "Hey!"
+  },
+  {
+    "role": "user",
+    "content": "Hey!"
+  },
+  {
+    "role": "assistant",
+    "content": "It sounds like you're feeling a bit overwhelmed with your current situation and perhaps also maybe also considering writing down your main concerns to clarify and organize them before discussing with others. You might find it helpful to take some time to gather all the thoughts that are on your mind in order, which could make for a more productive conversation when you do talk about everything."
   }
 ]

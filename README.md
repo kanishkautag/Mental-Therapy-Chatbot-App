@@ -72,7 +72,7 @@ streamlit run main.py
 
 ## Architecture Diagram
 
-![alt text](image.png)
+![alt text](image_copy.png)
 
 ## License
 

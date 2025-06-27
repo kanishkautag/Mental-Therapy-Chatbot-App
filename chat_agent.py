@@ -29,7 +29,7 @@ supervisor_llm = get_llm()
 COMMON_GREETINGS_CHECK = [
     "hi", "hello", "hey", "yo", "sup", "what's up", "whats up",
     "good morning", "good afternoon", "good evening", "greetings",
-    "hiya", "howdy"
+    "hiya", "howdy","Namaste"
 ]
 
 # --- get_empathy_response (No Changes from previous minimal version) ---

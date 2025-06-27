@@ -55,5 +55,19 @@
     "entry": "Feeling good",
     "mood": "Good",
     "tags": []
+  },
+  {
+    "timestamp": "2025-04-26 09:44:22",
+    "date": "2025-04-26",
+    "entry": "very good\n",
+    "mood": "Excellent",
+    "tags": []
+  },
+  {
+    "timestamp": "2025-04-26 11:06:23",
+    "date": "2025-04-26",
+    "entry": "My day was great today",
+    "mood": "Neutral",
+    "tags": []
   }
 ]

@@ -1,14 +1,14 @@
 [
   {
     "role": "assistant",
-    "content": "Hello! How can I help you today?"
+    "content": "Chat cleared. How can I help you now?"
   },
   {
     "role": "user",
-    "content": "I am frustrated because students arent coming for mini project review on time. What should I do?"
+    "content": "I am dissapointed with my marks."
   },
   {
     "role": "assistant",
-    "content": "Perhaps you could consider sending out reminders to your students about their expected arrival times or providing an estimated deadline in advance so they can plan accordingly? You might also want to establish a clear communication channel for students who are struggling with the project timing."
+    "content": "I'm sorry to hear that you're feeling disappointed about your recent grades. Perhaps we could review some study materials together and practice questions to help clarify any concepts that are giving you trouble? You might also consider setting aside dedicated time for studying each week to ensure a more consistent understanding of the material."
   }
 ]

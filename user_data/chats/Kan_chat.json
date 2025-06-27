@@ -1,0 +1,30 @@
+[
+  {
+    "role": "assistant",
+    "content": "Chat cleared. How can I help you now?"
+  },
+  {
+    "role": "user",
+    "content": "hi"
+  },
+  {
+    "role": "assistant",
+    "content": "Hello! How can I help you today?"
+  },
+  {
+    "role": "user",
+    "content": "gimme youtube video for lex fridman"
+  },
+  {
+    "role": "assistant",
+    "content": "I can help find videos on YouTube. What topic are you interested in watching?"
+  },
+  {
+    "role": "user",
+    "content": "lex fridman"
+  },
+  {
+    "role": "assistant",
+    "content": "I can help find videos on YouTube. What topic are you interested in watching?"
+  }
+]
